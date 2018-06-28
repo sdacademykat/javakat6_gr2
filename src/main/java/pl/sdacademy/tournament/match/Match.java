@@ -70,6 +70,10 @@ public class Match {
         }
     }
 
+    public void setEvents(MatchEvent matchEvent){
+        events.add(matchEvent);
+    };
+
     private Person getRandomPlayer(Team team) {
         Random random = new Random();
         List<Person> players = team.getPlayers();

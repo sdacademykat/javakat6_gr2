@@ -61,4 +61,29 @@ public class Group {
                     || m.getTeam2() == team)
                 .collect(Collectors.toList());
     }
+
+    public void addMatch(Match match) {
+        for (Integer round : matchesByRound.keySet()) {
+            boolean isMatchInRound = isMatchInGroup(matchesByRound.get(round), match);
+            if (!isMatchInRound) {
+                List<Match> matchesInRound = new ArrayList<>(matchesByRound.get(round));
+                matchesInRound.add(match);
+                matchesByRound.put(round, matchesInRound);
+            }
+        }
+    }
+
+    private boolean isMatchInGroup(List<Match> matchesFromRound, Match matchToAdd) {
+        for (Match match : matchesFromRound) {
+            if (isTeamInMatch(match, matchToAdd.getTeam1()) &&
+                    isTeamInMatch(match, matchToAdd.getTeam2())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isTeamInMatch(Match match, Team team) {
+        return match.getTeam1().equals(team) || match.getTeam2().equals(team);
+    }
 }
