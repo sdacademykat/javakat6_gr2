@@ -16,6 +16,12 @@ public class Match {
         this.team1 = team1;
         this.team2 = team2;
         randomizeEvents();
+        updateMatchesPlayed();
+    }
+
+    private void updateMatchesPlayed() {
+        this.team1.setMatchesPlayed(team1.getMatchesPlayed() + 1);
+        this.team2.setMatchesPlayed(team2.getMatchesPlayed() + 1);
     }
 
     public Team getTeam1() {

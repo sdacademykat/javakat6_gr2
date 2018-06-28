@@ -6,12 +6,13 @@ import pl.sdacademy.tournament.team.Team;
 import java.util.List;
 
 public class GroupTeamStatistics implements Comparable<GroupTeamStatistics> {
-    public final static String GROUP_TEAM_STATS_HEADER = "nazwa                | pkt | g.r | g.z | g.s\n" +
-        "----------------------------------------------\n";
+    public final static String GROUP_TEAM_STATS_HEADER = "nazwa                | pkt | g.r | g.z | g.s | m.r\n" +
+        "--------------------------------------------------\n";
     private Team team;
     private int points;
     private int goalsScored;
     private int goalsLost;
+    private int matchesPlayed;
 
     public GroupTeamStatistics(Team team, List<Match> matches) {
         this.team = team;
@@ -39,6 +40,8 @@ public class GroupTeamStatistics implements Comparable<GroupTeamStatistics> {
         } else if (teamGoals == opponentGoals) {
             points += 1;
         }
+
+        matchesPlayed = this.team.getMatchesPlayed();
     }
 
     private int getGoalsDifference() {
@@ -74,6 +77,7 @@ public class GroupTeamStatistics implements Comparable<GroupTeamStatistics> {
                 addLeftPadding(points, 3) + " | " +
                 addLeftPadding(goalsScored - goalsLost, 3) + " | " +
                 addLeftPadding(goalsScored, 3) + " | " +
-                addLeftPadding(goalsLost, 3) + "\n";
+                addLeftPadding(goalsLost, 3) + " | " +
+                addLeftPadding(matchesPlayed, 3) + "\n";
     }
 }
